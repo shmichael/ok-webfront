@@ -7,7 +7,7 @@
       </h1>
       <div class="row">
         <div class="span1" style="text-align:center;">
-          <div style="margin-bottom:0.2em;">{{#party}}<a class="btn" href="{{absolute_url}}">{{name}}</a>{{/party}}</div>
+          <div style="margin-bottom:0.2em;"><a class="btn" href="{{party_url}}">{{party_name}}</a></div>
           <img src="{{img_url}}" alt="התמונה של {{name}} מאתר הכנסת"/>
         </div>
         <div class="span2">
@@ -58,23 +58,13 @@
             <tr>
               <th style="vertical-align: top;"></th>
               <th class="score-bar">
-                <div style="width:100%">
+                <!-- scale -->
+                <div style="clear:both;width:100%">
                   <h4 style="float:right; width: 33%; margin: 0 0.2em 0.2em 0;text-align:right;">תומכות</h4>
                   <h4 style="float:right; width: 33%; margin-bottom:0.2em;">אדישים</h4>
                   <h4 style="float:right; width: 33%; margin-bottom:0.2em;text-align:left;">מתנגדים</h4>
                   <div style="clear:right;"></div>
-
                 </div>
-                <div class="progress" style="height:3em;">
-                  <div class="bar all" style="height:100%;width:80%; right:10%">
-                    <p style="padding-right:0.5em; text-align:right;"><em>חברי הכנסת</em></p>
-                  </div>
-                  <div class="bar party" style="width:40%; right:40%; height:3em; margin-top:0.5em"></div>
-                  <p style="height:3em; position:absolute; margin-top:1em; width:40%; right:40%">
-                  <em>{{#party}}{{name}}{{/party}}</em>
-                  </p>
-                </div>
-
               </th>
           </thead>
           <tbody id="agendas">
@@ -92,9 +82,10 @@
             </td>
             <td class="score-bar">
                 <div class="progress">
-                  <div id="agenda-bar-{{id}}" class="bar all"></div>
-                  <div id="agenda-bar-party-{{id}}" class="bar party" style="opacity:1;"></div>
-                  <div id="agenda-score-{{id}}" class="score"></div>
+                  <div id="agenda-bar-{{id}}" class="bar all" title="טוח כל חברי הכנסת"></div>
+                  <div id="agenda-bar-party-{{id}}" class="bar party"
+                       style="opacity:1;" title="נציגי {{party_name}}"></div>
+                  <div id="agenda-score-{{id}}" class="score" title="{{member_name}}"></div>
                 </div>
             </td>
           </tr>
@@ -144,12 +135,16 @@
             eventbox    : 'lib/eventbox',
             datatables  : 'lib/jquery.dataTables.min',
             btabs       : 'lib/bootstrap-tab',
+            btabs       : 'lib/bootstrap-tooltip',
             mustache    : 'lib/mustache'
         },
         callback: function () {
             require(['apps/'+app], function (app) {
               // TODO: find a way to pass entire content to app.init
-              app.agendas("{{agendas_uri}}");
+              app.agendas({uri: "{{agendas_uri}}", 
+                  member_name: "{{name}}",
+                  party_name: "{{party_name}}"
+              });
               app.bills("{{bills_uri}}");
             });
         }

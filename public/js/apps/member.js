@@ -14,9 +14,11 @@ define([
                 "bLengthChange": false
                 });
         },
-        agendas : function (uri) {
-            $.get(uri, function (data) {
+        agendas : function (params) {
+            $.get(params.uri, function (data) {
                 data.agendas.sort(function(x,y) { return y.score-x.score});
+                data.party_name = params.party_name;
+                data.member_name = params.member_name;
                 var template = $("#agenda-template").html();
                 $("#agendas").html(Mustache.render(template, data));
                 for (var i in data.agendas) {
@@ -27,6 +29,8 @@ define([
                   $("#agenda-bar-party-"+v.id).css('left', (v.party_min+100)/2+'%');
                   $("#agenda-bar-party-"+v.id).css('width', (v.party_max-v.party_min+1)/2+'%');
                 }
+                $(".bar").tooltip();
+                $(".score").tooltip();
             })
          },
         bills : function (uri) {
