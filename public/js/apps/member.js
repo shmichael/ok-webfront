@@ -8,11 +8,23 @@ define([
     var Mustache = window.Mustache;
     var app = {
         memberTable: function (table) {
-            $(table).dataTable({
+            var table = $(table).dataTable({
                 "oLanguage": { "sUrl": "txt/dataTables.txt"},
                 "iDisplayLength": 999,
-                "bLengthChange": false
+                "bLengthChange": false,
+                "aoColumns":  [ 
+                    { "bSearchable": false,
+                      "bVisible":    false }, 
+                    null,null,null,null,null,null, null]
                 });
+            $.fn.dataTableExt.afnFiltering.push(
+                  function( oSettings, aData, iDataIndex ) {
+                    if (document.getElementById('all-switch').checked)
+                      return true;
+                    else 
+                      return aData[0]=="true";
+            })
+            $('#all-switch').click(function () {table.fnDraw(); });
         },
         agendas : function (params) {
             $.get(params.uri, function (data) {

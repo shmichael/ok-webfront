@@ -1,8 +1,12 @@
 <link rel="stylesheet" href="/css/jquery.dataTables.css"/>
 <link rel="stylesheet" href="/css/member.css"/>
+<div style="float:left;">
+  <input id="all-switch" type="checkbox" value="all">הצג גם כאלו שפרשו
+</div>
 <table id="members" class="table table-striped table-bordered">
   <thead>
     <tr>
+      <th>is_current</th>
       <th>שם</th>
       <th>מפלגה</th>
       <th>נוכחות בועדות<h6>ממוצע ישיבות בחודש</h6></th>
@@ -15,6 +19,7 @@
   <tbody>
   {{#objects}}
     <tr>
+      <td>{{is_current}}</td>
       <td><a href="/member/{{id}}/">{{name}}</a></td>
       <td>{{#party}}{{name}}{{/party}}</td>
       <td>{{average_monthly_committee_presence}}</td>
