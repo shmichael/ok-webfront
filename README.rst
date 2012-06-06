@@ -10,11 +10,11 @@ Quick Start
 -----------
 
 
-Fork the repo: ``ok-templates.git`` by using the *Fork* button on github.
+Fork the repo: ``ok-webfront.git`` by using the *Fork* button on github.
 The only external dependecy is node.js so first get it for your platform
 from the `download page`_ and then::
 
-    $ git clone git@github.com:yourusername/ok-templates.git
+    $ git clone git@github.com:`your_username`/ok-webfront.git
     $ cd ok-webfront
     $ npm install -d
     $ node app.js
@@ -41,7 +41,7 @@ meaningful commit message and send a pull request to `hasadna's fork`_
 
 .. _Mustache: http://mustache.github.com
 .. _gettext: http://www.gnu.org/software/gettext/
-.. _hasadna's fork: https://github.com/hasadna/ok-templates
+.. _hasadna's fork: https://github.com/hasadna/ok-webfront
 .. _poedit: http://www.poedit.net/
 
 Improving Open Knesset Integration
