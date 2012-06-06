@@ -66,6 +66,25 @@
 
     </footer>
   </div>
+  <script>
+
+    // TODO: define all libraries here
+    var require = {
+        baseUrl : '/js',
+        deps    : ['jquery'],
+        paths   : {
+            jquery      : 'lib/jquery.min',
+            plugins     : 'lib',
+            eventbox    : 'lib/eventbox',
+            datatables  : 'lib/jquery.dataTables',
+            btabs       : 'lib/bootstrap-tab',
+            tooltip     : 'lib/bootstrap-tooltip',
+            mustache    : 'lib/mustache'
+        },
+        callback: init,
+    };
+  </script>
+  <script src="/js/lib/require.js"></script>
 
 </body>
 </html>

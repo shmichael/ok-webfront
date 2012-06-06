@@ -32,25 +32,11 @@
    </tbody>
 </table>
 <script>
-    var app = 'member';
-    // TODO: refactor to be handled by the node server
-    var require = {
-        baseUrl : '/js',
-        deps    : ['jquery'],
-        paths   : {
-            jquery      : 'lib/jquery.min',
-            plugins     : 'lib',
-            eventbox    : 'lib/eventbox',
-            datatables  : 'lib/jquery.dataTables.min',
-            btabs       : 'lib/bootstrap-tab',
-            mustache    : 'lib/mustache'
-        },
-        callback: function () {
-            require(['apps/'+app], function (app) {
-              // TODO: find a way to pass entire content to app.init
-              app.memberTable('#members');
-            });
-        }
+    function init() {
+        require(['apps/member'], function (app) {
+          // TODO: find a way to pass entire content to app.init
+          app.memberTable("#members");
+        });
     };
 </script>
-<script src="/js/lib/require.js"></script>
+

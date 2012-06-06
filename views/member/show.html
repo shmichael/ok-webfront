@@ -98,7 +98,7 @@
         <h3>הצעות המחכות לקריאה ראשונה ({{bills_stats_pre}})</h3>
         <h3>הצעות המחכות לדיון בוועדה ({{bills_stats_first}})</h3>
         <h3>הצעות שאושרו ({{bills_stats_first}})</h3>
-        <table>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>שם</th>
@@ -107,47 +107,33 @@
             </tr>
           </thead>
           <tbody id="bills">
+            <tr>
+              <td colspan="2">טוען...</td>
+            </tr>
           </tbody>
-          <script type="text/html" id="bill-template">
+        </table>
+        {{=<% %>=}}<script type="text/html" id="bill-template">
           {{#objects}}
             <tr>
-              <td><a href="{{absolute_url}}">{{full_title}}</a></td>
+              <td><a href="{{absolute_url}}">{{title}}</a></td>
               <td>{{stage}}</td>
               <td>{{stage_date}}</td>
             </tr>
            {{/objects}}
-         </script>
-         </table>
+       </script><%={{ }}=%>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-    var app = 'member';
-    // TODO: refactor to be handled by the node server
-    var require = {
-        baseUrl : '/js',
-        deps    : ['jquery'],
-        paths   : {
-            jquery      : 'lib/jquery.min',
-            plugins     : 'lib',
-            eventbox    : 'lib/eventbox',
-            datatables  : 'lib/jquery.dataTables.min',
-            btabs       : 'lib/bootstrap-tab',
-            btabs       : 'lib/bootstrap-tooltip',
-            mustache    : 'lib/mustache'
-        },
-        callback: function () {
-            require(['apps/'+app], function (app) {
-              // TODO: find a way to pass entire content to app.init
-              app.agendas({uri: "{{agendas_uri}}", 
-                  member_name: "{{name}}",
-                  party_name: "{{party_name}}"
-              });
-              app.bills("{{bills_uri}}");
+      function init () {
+          require(['apps/member'], function (app) {
+            app.agendas({uri: "{{agendas_uri}}", 
+                member_name: "{{name}}",
+                party_name: "{{party_name}}"
             });
-        }
-    };
+            app.bills("{{bills_uri}}");
+          });
+      }
 </script>
-<script src="/js/lib/require.js"></script>

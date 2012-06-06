@@ -3,6 +3,7 @@ define([
     'eventbox',
     'datatables',
     'btabs',
+    "tooltip",
     'mustache'
 ], function ($, Ebox) {
     var Mustache = window.Mustache;
@@ -15,14 +16,14 @@ define([
                 "aoColumns":  [ 
                     { "bSearchable": false,
                       "bVisible":    false }, 
-                    null,null,null,null,null,null, null]
-                });
+                    null,null,null,null,null,null, null],
+                "fnDrawCallback": function( oSettings ) {
+                   $(".dataTables_paginate").hide();
+                }
+            });
             $.fn.dataTableExt.afnFiltering.push(
                   function( oSettings, aData, iDataIndex ) {
-                    if (document.getElementById('all-switch').checked)
-                      return true;
-                    else 
-                      return aData[0]=="true";
+                    return (document.getElementById('all-switch').checked?true:aData[0]=="true");
             })
             $('#all-switch').click(function () {table.fnDraw(); });
         },
@@ -51,7 +52,7 @@ define([
                 $("#bills").html(Mustache.render(template, data));
                 $('#bills-tab>table').dataTable({
                       "oLanguage": { "sUrl": "txt/dataTables.txt"},
-                      "iDisplayLength": 25
+                      "iDisplayLength": 10
                       });
                 })
          }
