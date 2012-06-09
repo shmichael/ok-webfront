@@ -1,5 +1,6 @@
 module.exports = function(app) {
 
+  var util = require('util');
   var rest = require('./../lib/rest')(app);
 
   return {
@@ -37,8 +38,14 @@ module.exports = function(app) {
         next();
       } else {
         rest.get(req.path, function(err, data){
-          if ( err === null )
-              res.render(controller + '/' + action + '.html', data)
+          if ( err === null ) {
+            //- TODO(shmichael): Clean this up.
+            if (controller == "bill" && action == "index") {
+              res.render("bill/index.jade", data);
+              return;
+            }
+            res.render(controller + '/' + action + '.html', data);
+          }
           else {
             console.log('ERROR', err, req.path);
             res.end(null);
@@ -47,5 +54,4 @@ module.exports = function(app) {
       }
     }
   }
-
 };

@@ -56,6 +56,13 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+var property = require("./lib/property.js");
+app.dynamicProperties = {
+  page_title: property.creator()
+};
+// Add dynamic properties as helpers.
+app.dynamicHelpers (app.dynamicProperties);
+
 // Routes
 var routes = require('./routes')(app);
 

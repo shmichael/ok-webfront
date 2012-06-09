@@ -1,0 +1,76 @@
+!!! 5
+html
+  head
+    title= page_title.get()
+    meta(charset='UTF-8')
+    meta(name='Authors', content='Hasadna')
+    meta(name='License', content='CC-by-sa-3.0 Attribution-ShareAlike 3.0')
+    meta(http-equiv='Content-Language', content='{{LANGUAGE_CODE}}')
+    meta(name='ROBOTS', content='NOINDEX, NOFOLLOW')
+    base(href='/')
+    link(href='css/bootstrap-rtl.css?v=1', rel='stylesheet', type='text/css', media='screen')
+    link(href='css/bootstrap-responsive-rtl.css?v=1', rel='stylesheet', type='text/css', media='screen')
+    link(href='css/common.css?v=1', rel='stylesheet', type='text/css', media='screen')
+    link(rel='stylesheet', href='/css/jquery.dataTables.css')
+    link(rel='stylesheet', href='/css/member.css')
+    link(rel='shortcut icon', href='img/favicon.png')
+    style
+      body { padding-top:86px;}
+  body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          //- TODO(shmichael): Find a way to get this variable.
+          - if (typeof(main_url) != 'undefined')
+            a.brand(href=(main_url)) כנסת פתוחה
+          .nav-collapse
+            ul.nav
+              li#bill-nav
+                a(href='/bill/') חקיקה
+              li
+                a(href='#') ועדות
+              li#member-nav
+                a(href='/member/') חברי כנסת
+            //- TODO(shmichael): Find a way to get this variable.
+            - if (typeof(search_form) != 'undefined')
+              #search.pull-right.navbar-search_form= search_form
+            - if (typeof(user) != 'undefined')
+              ul.nav.pull-right
+                li
+                  a(href='#profile') Logged in as
+                  = name
+                li
+                  a(href='#edit_profile') Edit Profile
+                li
+                  a(href='#logout') Logout
+            - else
+              li
+                a(href='#login') login
+            .nav-collapse 
+    #main.container-fluid
+      !=body
+      footer.footer
+        p
+          a(href='/about') חלק מהזכויות שמורות. פרטים בקישור. שימוש בנתונים מהאתר כפוף למתן קרדיט וקישור לאתר.
+        p גרסת אבטיפוס
+    script
+      // TODO: define all libraries here
+      var require = {
+      baseUrl : '/js',
+      deps    : ['jquery'],
+      paths   : {
+      jquery      : 'lib/jquery.min',
+      plugins     : 'lib',
+      eventbox    : 'lib/eventbox',
+      datatables  : 'lib/jquery.dataTables.min',
+      btabs       : 'lib/bootstrap-tab',
+      tooltip     : 'lib/bootstrap-tooltip',
+      mustache    : 'lib/mustache'
+      },
+      callback: init,
+      };
+    script(src='/js/lib/require.js')

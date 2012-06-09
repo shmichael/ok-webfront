@@ -1,0 +1,23 @@
+- page_title.set("Bills")
+.container
+  table
+    thead
+      tr
+        th
+          שם
+        th
+          שלב
+        th
+          תאריך עדכון
+        th
+          חוק
+    tbody
+    each object in objects
+      tr
+        td
+          a(href=object.absolute_url)= object.title
+        td= object.stage
+        td= object.stage_date
+        td
+          - if (object.law)
+            span= object.law.title
